@@ -52,7 +52,7 @@ const SearchResult = ({ result }) => (
     <div className="flex flex-col w-full">
       <h2 className={`${concert.className} text-3xl text-center`}>{result.episode_title}</h2>
       <h3 className={`font-mono text-sm text-center mb-2`}>{formatDate(result.episode_date)} — {secondsToTimestamp(result.timestamp)}</h3>
-      <p className={`${raleway.className} text-sm`}>{result.text.slice(0, 775) + "[...]"}</p>
+      <p className={`${raleway.className} text-sm`}>{result.text + " [...]"}</p>
     </div>
   </div>
 )
