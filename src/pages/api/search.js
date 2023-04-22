@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     const new_query = encodeURIComponent(query);
 
     const response = await fetch(
-        `http://${base_url}?query=${new_query}`,
+        `http://${base_url}?query=${new_query}&k=50`,
         {headers: {
             'Authorization': token
         }}
