@@ -54,16 +54,16 @@ const SearchResult = ({ result }) => {
   }
   searchURL += result.episode_title.split(" ").join("+")
   return (
-    <div className="flex flex-row w-full h-full items-center justify-between border rounded-md p-4 shadow-md gap-8">
-    <Image alt="podcast cover image" className="overflow-hidden" src="/tafs.jpg" width={250} height={250} />
-    <div className="flex flex-col w-full">
-      <h2 className={`${concert.className} text-3xl text-center`}>{result.episode_title}</h2>
-      <h3 className={`font-mono text-sm text-center`}>{formatDate(result.episode_date)} — {secondsToTimestamp(result.timestamp)}</h3>
-      <a className="font-thin text-slate-800 text-lg text-center mb-2 underline decoration-dotted hover:text-slate-400" 
-      href={searchURL} target="_blank">Find on Youtube</a>
-      <p className={`${raleway.className} text-sm`}>{result.text.endsWith(".") ? result.text : result.text + " [...]"}</p>
+    <div className="flex flex-col w-full h-full items-center justify-between border rounded-md p-4 shadow-md gap-8 md:flex-row">
+      <Image alt="podcast cover image" className="overflow-hidden" src="/tafs.jpg" width={250} height={250} />
+      <div className="flex flex-col w-full">
+        <h2 className={`${concert.className} text-3xl text-center`}>{result.episode_title}</h2>
+        <h3 className={`font-mono text-sm text-center`}>{formatDate(result.episode_date)} — {secondsToTimestamp(result.timestamp)}</h3>
+        <a className="font-thin text-slate-800 text-lg text-center mb-2 underline decoration-dotted hover:text-slate-400" 
+        href={searchURL} target="_blank">Find on Youtube</a>
+        <p className={`${raleway.className} text-sm`}>{result.text.endsWith(".") ? result.text : result.text + " [...]"}</p>
+      </div>
     </div>
-  </div>
   )
 }
 
