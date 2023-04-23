@@ -91,11 +91,11 @@ export default function Home() {
         </form>
         <div className="flex flex-row w-full justify-center items-center space-x-4">
           <span>Results to Display:</span>
-          <button onClick={() => setNumToDisplay(10)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer  transition-colors ${numToDisplay === 10 ? "bg-blue-800" : "hover:bg-blue-400"}`}>10</button>
-          <button onClick={() => setNumToDisplay(20)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 20 ? "bg-blue-800" : "hover:bg-blue-400"}`}>20</button>
-          <button onClick={() => setNumToDisplay(30)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 30 ? "bg-blue-800" : "hover:bg-blue-400"}`}>30</button>
-          <button onClick={() => setNumToDisplay(40)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 40 ? "bg-blue-800" : "hover:bg-blue-400"}`}>40</button>
-          <button onClick={() => setNumToDisplay(50)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 50 ? "bg-blue-800" : "hover:bg-blue-400"}`}>50</button>
+          <button onClick={() => setNumToDisplay(10)} className={`h-12 px-3 bg-blue-500 text-white rounded-lg cursor-pointer  transition-colors ${numToDisplay === 10 ? "bg-blue-800" : "hover:bg-blue-400"}`}>10</button>
+          <button onClick={() => setNumToDisplay(20)} className={`h-12 px-3 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 20 ? "bg-blue-800" : "hover:bg-blue-400"}`}>20</button>
+          <button onClick={() => setNumToDisplay(30)} className={`h-12 px-3 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 30 ? "bg-blue-800" : "hover:bg-blue-400"}`}>30</button>
+          <button onClick={() => setNumToDisplay(40)} className={`h-12 px-3 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 40 ? "bg-blue-800" : "hover:bg-blue-400"}`}>40</button>
+          <button onClick={() => setNumToDisplay(50)} className={`h-12 px-3 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 50 ? "bg-blue-800" : "hover:bg-blue-400"}`}>50</button>
         </div>
       </div>
       <div className="flex flex-col justify-start items-center space-y-3 w-full border-box p-4">
