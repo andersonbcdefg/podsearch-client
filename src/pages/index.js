@@ -82,8 +82,8 @@ export default function Home() {
 
   return (
     <div className="w-full h-full">
-      <div className="sticky w-full bg-white py-4 space-y-4 flex items-center justify-start flex-col top-0 border-b border-slate-400 shadow-sm">
-        <h1 className={`${concert.className} text-5xl text-center`}>{process.env.NEXT_PUBLIC_SITE_TITLE}</h1>
+      <div className="sticky w-full bg-white p-4 space-y-4 flex items-center justify-start flex-col top-0 border-b border-slate-400 shadow-sm">
+        <h1 className={`${concert.className} text-3xl text-center md:text-5xl`}>{process.env.NEXT_PUBLIC_SITE_TITLE}</h1>
         <p className={`${raleway.className} text-md text-center`}>{process.env.NEXT_PUBLIC_SITE_DESCRIPTION}</p>
         <form className="flex w-full items-center justify-center space-x-4" onSubmit={semanticSearch}>
           <input ref={inputRef} className={`w-3/4 h-12 px-4 border-2 border-gray-300 rounded-lg ${raleway.className}`} placeholder="Search for a podcast" />
