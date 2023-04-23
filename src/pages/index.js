@@ -17,7 +17,6 @@ const Spinner = ({ size = 40, color = '#000' }) => {
   );
 };
 
-
 function secondsToTimestamp(seconds) {
   const date = new Date(seconds * 1000); // multiply by 1000 to convert seconds to milliseconds
   const hh = date.getUTCHours().toString().padStart(2, '0');
@@ -46,26 +45,31 @@ function formatDate(dateString) {
   return `${Number(day).toString().padStart(2, "0")} ${monthName}, ${year}`;
 }
 
-const SearchResult = ({ result }) => (
-  <div className="flex flex-row w-full h-full items-center justify-between border rounded-md p-4 shadow-md gap-8">
+const SearchResult = ({ result }) => {
+  let searchURL = "https://www.youtube.com/results?search_query=";
+  if (result.episode_date.slice(0, 4) === "2023" || (result.episode_date.slice(0, 4) === "2022" && result.episode_date.slice(5, 7) > 6)) {
+    searchURL += "the+adam+friedland+show+"
+  } else {
+    searchURL += "cum+town+"
+  }
+  searchURL += result.episode_title.split(" ").join("+")
+  return (
+    <div className="flex flex-row w-full h-full items-center justify-between border rounded-md p-4 shadow-md gap-8">
     <Image alt="podcast cover image" className="overflow-hidden" src="/tafs.jpg" width={250} height={250} />
     <div className="flex flex-col w-full">
       <h2 className={`${concert.className} text-3xl text-center`}>{result.episode_title}</h2>
-      <h3 className={`font-mono text-sm text-center mb-2`}>{formatDate(result.episode_date)} — {secondsToTimestamp(result.timestamp)}</h3>
+      <h3 className={`font-mono text-sm text-center`}>{formatDate(result.episode_date)} — {secondsToTimestamp(result.timestamp)}</h3>
+      <a className="font-thin text-slate-800 text-lg text-center mb-2 underline decoration-dotted hover:text-slate-400" 
+      href={searchURL} target="_blank">Find on Youtube</a>
       <p className={`${raleway.className} text-sm`}>{result.text.endsWith(".") ? result.text : result.text + " [...]"}</p>
     </div>
   </div>
-)
-
-const dummyResult = {
-  episode_title: "Joe Rogan Experience #1440 - Elon Musk",
-  episode_date: "2021-03-05",
-  timestamp: "00:00:00",
-  text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+  )
 }
 
 export default function Home() {
   const [results, setResults] = useState([]);
+  const [numToDisplay, setNumToDisplay] = useState(10); // [10, 20, 30, 40, 50]
   const inputRef = useRef(null);
 
   const semanticSearch = async (e) => {
@@ -77,14 +81,25 @@ export default function Home() {
   }
 
   return (
-    <div className="w-full h-full py-4 space-y-4 flex items-center justify-start flex-col">
-      <h1 className={`${concert.className} text-5xl text-center`}>TAFSearch</h1>
-      <form className="flex w-full items-center justify-center space-x-4" onSubmit={semanticSearch}>
-        <input ref={inputRef} className={`w-3/4 h-12 px-4 border-2 border-gray-300 rounded-lg ${raleway.className}`} placeholder="Search for a podcast" />
-        <button type="submit" className="h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-400 transition-colors">Search</button>
-      </form>
-      <div className="flex flex-col justify-start items-center space-y-3 w-full border-box px-4">
-        {results === "loading" ? <Spinner color="#2563eb"/> : results.map((result, idx) => (
+    <div className="w-full h-full">
+      <div className="sticky w-full bg-white py-4 space-y-4 flex items-center justify-start flex-col top-0 border-b border-slate-400 shadow-sm">
+        <h1 className={`${concert.className} text-5xl text-center`}>{process.env.NEXT_PUBLIC_SITE_TITLE}</h1>
+        <p className={`${raleway.className} text-md text-center`}>{process.env.NEXT_PUBLIC_SITE_DESCRIPTION}</p>
+        <form className="flex w-full items-center justify-center space-x-4" onSubmit={semanticSearch}>
+          <input ref={inputRef} className={`w-3/4 h-12 px-4 border-2 border-gray-300 rounded-lg ${raleway.className}`} placeholder="Search for a podcast" />
+          <button type="submit" className="h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-400 transition-colors">Search</button>
+        </form>
+        <div className="flex flex-row w-full justify-center items-center space-x-4">
+          <span>Results to Display:</span>
+          <button onClick={() => setNumToDisplay(10)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer  transition-colors ${numToDisplay === 10 ? "bg-blue-800" : "hover:bg-blue-400"}`}>10</button>
+          <button onClick={() => setNumToDisplay(20)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 20 ? "bg-blue-800" : "hover:bg-blue-400"}`}>20</button>
+          <button onClick={() => setNumToDisplay(30)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 30 ? "bg-blue-800" : "hover:bg-blue-400"}`}>30</button>
+          <button onClick={() => setNumToDisplay(40)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 40 ? "bg-blue-800" : "hover:bg-blue-400"}`}>40</button>
+          <button onClick={() => setNumToDisplay(50)} className={`h-12 px-4 bg-blue-500 text-white rounded-lg cursor-pointer transition-colors ${numToDisplay === 50 ? "bg-blue-800" : "hover:bg-blue-400"}`}>50</button>
+        </div>
+      </div>
+      <div className="flex flex-col justify-start items-center space-y-3 w-full border-box p-4">
+        {results === "loading" ? <Spinner color="#2563eb"/> : results.slice(0, numToDisplay).map((result, idx) => (
           <SearchResult result={result} key={idx} />
         ))}
       </div>
